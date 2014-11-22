@@ -1,0 +1,63 @@
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="am_bill_register_report_tree_view">
+                <field name="name">am.bill.register.report.tree</field>
+                <field name="model">am.bill.register.report</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Bill Register Report" create="false">
+                        <field name="number"/>   
+                        <field name="state"/>                        
+                        <field name="date_invoice"/>
+                        <field name="vechile_model_id"/>
+                        <field name="executive_id"/>
+                        <field name="deliver_branch_id"/>
+                        <field name="chase_no"/>
+                        <field name="delivery_date"/>
+                        <field name="amount_untaxed"/>
+                        <field name="vat_amt"/>
+                        <field name="vat_1_amt" />
+                        <field name="st_12amt"/>
+                        <field name="st_1_12amt" />
+                        <field name="edushe" />
+                        <field name="amount_tax" />
+                        <field name="amount_total" />                        
+                    </tree>
+                </field>
+            </record>            
+            
+            <record id="view_am_bill_register_report_search" model="ir.ui.view">            
+        	<field name="name">am.bill.register.report.search</field>
+        	<field name="model">am.bill.register.report</field>
+        	<field name="arch" type="xml">
+            	<search string="Bill Receipt Analysis">
+                	<group expand="0" string="Extended Filters...">                    
+                    	<field name="executive_id"/>
+                    	<field name="deliver_branch_id"/>                    
+                	</group>
+                	<group expand="1" string="Group By...">                    
+                    	<filter string="Sales Executive" icon="terp-stock_symbol-selection" name="Executive" context="{'group_by':'executive_id'}"/>
+                    	<filter string="Filter By Branch" icon="terp-stock_effects-object-colorize" name="Branch"  context="{'group_by':'deliver_branch_id'}"/>               
+               		</group>
+           		 </search>
+        	</field>
+   		   </record>
+   		 
+            
+            
+            
+            
+           <record model="ir.actions.act_window" id="action_am_bill_register_report_tree_view">
+                <field name="name">Bill Register Report</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">am.bill.register.report</field>
+		   <!-- <field name="domain">[('field_name','condition',criteria)]</field>-->
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,graph</field>
+                <field name="search_view_id" ref="view_am_bill_register_report_search"/>
+                <field name="view_id" ref="am_bill_register_report_tree_view"/>
+            </record>
+
+    
+    </data>
+</openerp>

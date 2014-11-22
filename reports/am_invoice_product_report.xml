@@ -1,0 +1,56 @@
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="am_invoice_product_report_tree_view">
+                <field name="name">am.invoice.product.report.tree</field>
+                <field name="model">am.invoice.product.report</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Invoice Product Report" create="false">
+                        <field name="origin"/>   
+                        <field name="state"/>                        
+                        <field name="date_invoice"/>
+                        <field name="invoice_number"/>
+                        <field name="product_id"/>
+                        <field name="categ_id"/>
+                        <field name="type"/>
+                        <field name="price_unit"/>
+                        <field name="quantity"/>
+                        <field name="price_subtotal"/>
+                        <field name="price_margin" />
+                        <field name="name" />
+                        <field name="description" />                        
+                    </tree>
+                </field>
+            </record>            
+            
+            
+          <record id="view_am_invoice_product_report_search" model="ir.ui.view">            
+        	<field name="name">am.invoice.product.report.search</field>
+        	<field name="model">am.invoice.product.report</field>
+        	<field name="arch" type="xml">
+            	<search string="Invoice Analysis">
+                	<group expand="0" string="Extended Filters...">                    
+                    	<field name="categ_id"/>                    
+                	</group>
+                	<group expand="1" string="Group By...">                    
+                    	<filter string="Category of Product" icon="terp-stock_symbol-selection" name="Category" context="{'group_by':'categ_id'}"/>
+                    	<filter string="State" icon="terp-stock_effects-object-colorize" context="{'group_by':'state'}"/>               
+               		</group>
+           		 </search>
+        	</field>
+   		   </record>
+   		 
+           <record model="ir.actions.act_window" id="action_am_invoice_product_report_tree_view">
+                <field name="name">Invoice Product Report</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">am.invoice.product.report</field>
+		   <!-- <field name="domain">[('field_name','condition',criteria)]</field>-->
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,graph</field>
+                <field name="search_view_id" ref="view_am_invoice_product_report_search"/>
+                <field name="view_id" ref="am_invoice_product_report_tree_view"/>
+            </record>
+
+    
+    </data>
+</openerp>
