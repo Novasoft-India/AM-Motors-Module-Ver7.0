@@ -6,6 +6,7 @@
                 <field name="type">tree</field>
                 <field name="arch" type="xml">
                     <tree string="Bill Register Report" create="false">
+                        <field name="company_id" domain="[('company_id','=',user.company_id.id)]" />
                         <field name="number"/>   
                         <field name="state"/>                        
                         <field name="date_invoice"/>
@@ -33,11 +34,13 @@
             	<search string="Bill Receipt Analysis">
                 	<group expand="0" string="Extended Filters...">                    
                     	<field name="executive_id"/>
-                    	<field name="deliver_branch_id"/>                    
+                    	<field name="deliver_branch_id"/> 
+                    	<field name="company_id"/>                   
                 	</group>
                 	<group expand="1" string="Group By...">                    
                     	<filter string="Sales Executive" icon="terp-stock_symbol-selection" name="Executive" context="{'group_by':'executive_id'}"/>
-                    	<filter string="Filter By Branch" icon="terp-stock_effects-object-colorize" name="Branch"  context="{'group_by':'deliver_branch_id'}"/>               
+                    	<filter string="By Branch" icon="terp-stock_effects-object-colorize" name="Branch"  context="{'group_by':'company_id'}"/>
+                    	                 
                		</group>
            		 </search>
         	</field>

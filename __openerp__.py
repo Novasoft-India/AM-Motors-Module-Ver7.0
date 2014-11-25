@@ -8,7 +8,7 @@
     
     """,
     'website': 'http://www.novasoftindia.com',
-    'data': ['tax_line_view.xml','reports/am_bill_register_report.xml','reports/am_invoice_product_report.xml'],
+    'data': ['tax_line_view.xml','reports/am_invoice_product_report.xml','reports/am_bill_register_report.xml'],
     'demo': [],
     'installable': True,
     'auto_install': False,

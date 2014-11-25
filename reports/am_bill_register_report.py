@@ -10,7 +10,9 @@ class am_bill_register_report(osv.osv):
     _auto = False
  
     _columns = {
+            
             'number':fields.char('Invoice',size=64,readonly=True),
+            'company_id':fields.many2one('res.company','Branch',readonly=True),
             'state':fields.char('State',size=64,readonly=True),
             'date_invoice': fields.date('Invoice Date', readonly=True),
             'vechile_model_id':fields.many2one('ammotors.vechilemodel','Model',readonly=True),
@@ -26,6 +28,7 @@ class am_bill_register_report(osv.osv):
             'edushe': fields.float('Educational Cess', readonly=True),             
             'amount_tax' : fields.float('Tax Total',readonly=True),
             'amount_total' : fields.float('Bill Amount',readonly=True)
+           
             }
     _order = 'number'
     
@@ -36,6 +39,7 @@ class am_bill_register_report(osv.osv):
                 CREATE OR REPLACE VIEW am_bill_register_report AS( 
                    SELECT 
                     min(a_i.id) as id,
+                    a_i.company_id ,
                     a_i.create_date, 
                     a_i.number, 
                     a_i.amount_tax, 
@@ -52,7 +56,7 @@ class am_bill_register_report(osv.osv):
                     s_o.deliver_branch_id, 
                     s_o.chase_no, 
                     s_o.executive_id, 
-                    s_o.delivery_date                    
+                    s_o.delivery_date                                       
                 FROM 
                     account_invoice a_i
                     left join account_invoice_tax a_i_vat on (a_i.id= a_i_vat.invoice_id) AND a_i_vat.name = 'VAT 14.5'
@@ -60,8 +64,9 @@ class am_bill_register_report(osv.osv):
                     left join account_invoice_tax a_i_st on (a_i.id= a_i_st.invoice_id) AND a_i_st.name = 'ST 12%' 
                     left join account_invoice_tax a_i_st1 on (a_i.id= a_i_st1.invoice_id) AND a_i_st1.name = 'ST@12%'
                     left join account_invoice_tax a_i_she on (a_i.id= a_i_she.invoice_id) AND a_i_she.name = 'Edu. SHE  3%'                     
-                    left join sale_order s_o on (s_o.id=a_i.x_so)                     
-                Group By                    
+                    left join sale_order s_o on (s_o.id=a_i.x_so)                               
+                Group By 
+                    a_i.company_id ,                  
                     a_i.create_date, 
                     a_i.number, 
                     a_i.amount_tax, 
